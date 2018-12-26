@@ -4,6 +4,7 @@ import org.opengg.bean.User;
 import org.opengg.mapper.UserMapper;
 import org.opengg.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +17,6 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     public List<User> queryAll() {
-        return userMapper.queryAll();
-    }
-
-    public List<User> findAll() {
         return userMapper.queryAll();
     }
 
@@ -39,23 +36,11 @@ public class UserServiceImpl implements UserService {
         userMapper.insertUser(user);
     }
 
-    public User queryById(Integer userId) {
-        return userMapper.queryById(userId);
-    }
-
-    public void update(User user) {
-        userMapper.update(user);
-    }
-
-    public void deleteUserById(Integer userId) {
-        userMapper.deleteUserById(userId);
-    }
-
     public void deletes(Integer[] userId) {
         userMapper.deletes(userId);
     }
 
-    public List<Integer> queryRoleIdsByUserId(Integer userId) {
+    public List<Integer> queryRoleIdsByUserId(String userId) {
         return userMapper.queryRoleIdsByUserId(userId);
     }
 
@@ -65,5 +50,25 @@ public class UserServiceImpl implements UserService {
 
     public void deleteUserRoles(Map<String, Object> map) {
         userMapper.deleteUserRoles(map);
+    }
+
+
+
+
+    @Cacheable(cacheNames = "userList", key = "'userList'")
+    public List<User> findAll() {
+        return userMapper.queryAll();
+    }
+    @Cacheable(cacheNames = "user", key = "#userId")
+    public User queryById(String userId) {
+        return userMapper.queryById(userId);
+    }
+
+    public void update(User user) {
+        userMapper.update(user);
+    }
+
+    public void deleteUserById(String userId) {
+        userMapper.deleteUserById(userId);
     }
 }

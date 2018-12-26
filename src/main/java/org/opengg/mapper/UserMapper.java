@@ -1,7 +1,5 @@
 package org.opengg.mapper;
 
-
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.opengg.bean.User;
 
@@ -21,15 +19,15 @@ public interface UserMapper {
     void insertUser(User user);
 
     @Select("select * from t_user where user_id = #{userId}")
-    User queryById(Integer userId);
+    User queryById(String userId);
 
     void update(User user);
 
-    void deleteUserById(Integer userId);
+    void deleteUserById(String userId);
 
     void deletes(Integer[] userId);
 
-    List<Integer> queryRoleIdsByUserId(Integer userId);
+    List<Integer> queryRoleIdsByUserId(String userId);
 
     void insertUserRoles(Map<String, Object> map);
 

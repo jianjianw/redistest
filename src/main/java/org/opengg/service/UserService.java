@@ -21,15 +21,15 @@ public interface UserService {
 
     void insertUser(User user);
 
-    User queryById(Integer userId);
+    User queryById(String userId);
 
     void update(User user);
 
-    void deleteUserById(Integer userId);
+    void deleteUserById(String userId);
 
     void deletes(Integer[] userId);
 
-    List<Integer> queryRoleIdsByUserId(Integer userId);
+    List<Integer> queryRoleIdsByUserId(String userId);
 
     void insertUserRoles(Map<String, Object> map);
 

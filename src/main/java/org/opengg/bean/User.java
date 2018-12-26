@@ -3,17 +3,17 @@ package org.opengg.bean;
 import java.io.Serializable;
 
 public class User implements Serializable{
-    private int userId;
+    private String userId;
     private String username;
     private String password;
     private String email;
     private String createTime;
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
